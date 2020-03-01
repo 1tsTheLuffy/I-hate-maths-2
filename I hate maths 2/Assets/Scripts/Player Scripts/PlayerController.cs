@@ -13,6 +13,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float x2 = 1f;
     [SerializeField] float y1 = 1f;
     [SerializeField] float y2 = 1f;
+    [SerializeField] float shakeDuration = .1f;
+    [SerializeField] float shakeAmplitude = 1.2f;
+    [SerializeField] float shakeFrequency = .5f;
+
+    [Header("Camera Shake")]
+    [SerializeField] CameraShake shake;
 
     Rigidbody2D rb;
     Camera cam;
@@ -21,6 +27,8 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         cam = Camera.main;
+
+        shake = GameObject.FindGameObjectWithTag("CameraShake").GetComponent<CameraShake>();
 
         Cursor.visible = false;
     }
@@ -34,5 +42,10 @@ public class PlayerController : MonoBehaviour
         transform.position = mousePos;
 
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, x1, x2), Mathf.Clamp(transform.position.y, y1, y2), transform.position.z);
+
+        if(Input.GetMouseButtonDown(0))
+        {
+            shake.C_Shake(shakeDuration, shakeAmplitude, shakeFrequency);
+        }
     }
 }
