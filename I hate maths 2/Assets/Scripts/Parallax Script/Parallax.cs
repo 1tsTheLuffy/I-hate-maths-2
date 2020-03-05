@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿// You can fuck me for this..
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
