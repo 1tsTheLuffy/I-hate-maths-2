@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
 {
     private Vector2 movement;
     private Vector2 mousePos;
+    #region float
     [Header("Floats")]
     [SerializeField] float x1 = 1f;
     [SerializeField] float x2 = 1f;
@@ -19,13 +20,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float startTimeForShoot = 1f;
     [SerializeField] float timeBtwShoot = 1f;
     [SerializeField] float waitTime = .2f;
+    public float health = 15f;
+    #endregion
 
     [Header("GameObject")]
     [SerializeField] GameObject bullet;
     [SerializeField] GameObject[] bulletType;
     [SerializeField] GameObject shootParticle;
     [SerializeField] GameObject[] shootParticleType;
-    [SerializeField] GameObject powerUpTaken;
+    [SerializeField] GameObject[] powerUpTaken;
 
     [Header("Transforms")]
     [SerializeField] Transform shootPoint;
@@ -38,6 +41,9 @@ public class PlayerController : MonoBehaviour
 
     [Header("Colors")]
     [SerializeField] Color[] flash;
+
+    [Header("UI")]
+    [SerializeField] HealthBar bar;
 
     Rigidbody2D rb;
     SpriteRenderer sr;
@@ -55,6 +61,8 @@ public class PlayerController : MonoBehaviour
         shootParticle = shootParticleType[0];
 
         startTimeForShoot = timeBtwShoot;
+
+        bar.setMaxHealth(health);
 
         Cursor.visible = false;
     }
@@ -81,14 +89,32 @@ public class PlayerController : MonoBehaviour
         {
             startTimeForShoot -= Time.deltaTime;
         }
+
+        if(health <= 0)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            health--;
+        }
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            health++;
+        }
+
+        bar.setHealth(health);
     }
 
+    #region Trigger
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Bullet_2_PowerUp"))
         {
             Destroy(collision.transform.gameObject);
-            GameObject instance = Instantiate(powerUpTaken, transform.position, Quaternion.identity);
+            GameObject instance = Instantiate(powerUpTaken[0], transform.position, Quaternion.identity);
             bullet = bulletType[1];
             shootParticle = shootParticleType[1];
             waitTime = .2f;
@@ -96,7 +122,30 @@ public class PlayerController : MonoBehaviour
             Destroy(instance, 1f);
             return;
         }
+        if(collision.CompareTag("Bullet_3_PowerUp"))
+        {
+            Destroy(collision.transform.gameObject);
+            GameObject instance = Instantiate(powerUpTaken[1], transform.position, Quaternion.identity);
+            bullet = bulletType[2];
+            shootParticle = shootParticleType[2];
+            waitTime = .2f;
+            StartCoroutine(Flash(Color.yellow));
+            Destroy(instance, 1f);
+            return;
+        }
+
+        if(collision.CompareTag("Health_PowerUp"))
+        {
+            Destroy(collision.transform.gameObject);
+            GameObject instance = Instantiate(powerUpTaken[2], transform.position, Quaternion.identity);
+            health += 5f;
+            waitTime = .2f;
+            StartCoroutine(Flash(flash[2]));
+            Destroy(instance, 1f);
+            return;
+        }
     }
+    #endregion
 
     private GameObject Shoot()
     {

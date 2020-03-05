@@ -6,6 +6,9 @@ TagManager:
   tags:
   - CameraShake
   - Bullet_2_PowerUp
+  - Bullet_3_PowerUp
+  - Health_PowerUp
+  - Assistant_PowerUp
   layers:
   - Default
   - TransparentFX

@@ -200,17 +200,23 @@ MonoBehaviour:
   y2: 5
   startTimeForShoot: 0.2
   timeBtwShoot: 0.2
+  waitTime: 0.2
+  health: 20
   bullet: {fileID: 0}
   bulletType:
   - {fileID: 6517320061466344772, guid: 360009f15327a1340aa3380f3a657489, type: 3}
   - {fileID: 8563498474583443814, guid: 73bfd98531ce55b4c9eb34856fb8fdc8, type: 3}
+  - {fileID: 2440214587522445156, guid: 2329bada933f3b34093f54a2b694d4ac, type: 3}
   shootParticle: {fileID: 8079170650621563024, guid: c7e76584db1757e4597c8b8536d6ab4e,
     type: 3}
   shootParticleType:
   - {fileID: 8079170650621563024, guid: c7e76584db1757e4597c8b8536d6ab4e, type: 3}
   - {fileID: 8079170650621563024, guid: eba39ab7a5fd50d46809928b60d92c0d, type: 3}
-  powerUpTaken: {fileID: 2872100424434549580, guid: 1bc739cd5cfc46842bb788c796de7ca9,
-    type: 3}
+  - {fileID: 8079170650621563024, guid: 3439dfee960676f44801591a17f09875, type: 3}
+  powerUpTaken:
+  - {fileID: 2872100424434549580, guid: 1bc739cd5cfc46842bb788c796de7ca9, type: 3}
+  - {fileID: 2872100424434549580, guid: 7be52423de9e3bb49b650ee306c733ee, type: 3}
+  - {fileID: 2872100424434549580, guid: d17dc44eb1fdec9479a20cf2f0ffe1dd, type: 3}
   shootPoint: {fileID: 3674765806794300681}
   shake: {fileID: 0}
   shakeDuration: 0.1
@@ -219,3 +225,5 @@ MonoBehaviour:
   flash:
   - {r: 0.32156864, g: 0.32156864, b: 0.32156864, a: 1}
   - {r: 1, g: 0.2216981, b: 0.2216981, a: 1}
+  - {r: 0.2235294, g: 1, b: 0.6681753, a: 1}
+  bar: {fileID: 0}
