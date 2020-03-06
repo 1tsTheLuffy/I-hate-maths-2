@@ -9,6 +9,8 @@ TagManager:
   - Bullet_3_PowerUp
   - Health_PowerUp
   - Assistant_PowerUp
+  - Enemy
+  - Bullet_1
   layers:
   - Default
   - TransparentFX

@@ -7,6 +7,7 @@ public class Assistant : MonoBehaviour
     public int assistantNum;
 
     [SerializeField] GameObject[] assistant;
+    [SerializeField] GameObject powerUpTaken;
 
     [SerializeField] Transform assistantPoint;
 
@@ -22,8 +23,10 @@ public class Assistant : MonoBehaviour
             if (assistantNum == 0)
             {
                 Destroy(collision.transform.gameObject);
+                GameObject instance = Instantiate(powerUpTaken, transform.position, Quaternion.identity);
                 Instantiate(assistant[0], assistantPoint.position, Quaternion.identity);
                 assistantNum = 1;
+                Destroy(instance, 1f);
                 return;
             }
         }
@@ -32,8 +35,10 @@ public class Assistant : MonoBehaviour
             if (assistantNum == 1)
             {
                 Destroy(collision.transform.gameObject);
+                GameObject instance = Instantiate(powerUpTaken, transform.position, Quaternion.identity);
                 Instantiate(assistant[1], assistantPoint.position, Quaternion.identity);
                 assistantNum = 2;
+                Destroy(instance, 1f);
                 return;
             }
         }

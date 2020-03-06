@@ -111,7 +111,8 @@ public class PlayerController : MonoBehaviour
     #region Trigger
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Bullet_2_PowerUp"))
+        #region PowerUps
+        if (collision.CompareTag("Bullet_2_PowerUp"))
         {
             Destroy(collision.transform.gameObject);
             GameObject instance = Instantiate(powerUpTaken[0], transform.position, Quaternion.identity);
@@ -144,6 +145,18 @@ public class PlayerController : MonoBehaviour
             Destroy(instance, 1f);
             return;
         }
+        #endregion
+
+        #region EnemiesHit
+
+        if(collision.CompareTag("Enemy"))
+        {
+            Destroy(collision.transform.gameObject);
+            shake.C_Shake(.1f, 2f, .8f);
+            health -= 1f;
+        }
+
+        #endregion
     }
     #endregion
 

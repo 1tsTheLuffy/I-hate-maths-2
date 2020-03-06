@@ -15,7 +15,7 @@ public class UpAssistant : MonoBehaviour
     public static GameObject instance;
     [SerializeField] GameObject bullet;
     [SerializeField] GameObject bulletIntantiate;
-    [SerializeField] GameObject destroyParticle;
+   // [SerializeField] GameObject destroyParticle;
 
     [SerializeField] Transform shootPoint;
 
@@ -46,11 +46,9 @@ public class UpAssistant : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
 
-        bus = GameObject.FindGameObjectWithTag("DreamBus").transform;
+        bus = GameObject.FindGameObjectWithTag("Player").transform;
         shake = GameObject.FindGameObjectWithTag("CameraShake").GetComponent<CameraShake>();
-        assistant = GameObject.FindGameObjectWithTag("DreamBus").GetComponent<Assistant>();
-
-        sr.color = Color.green;
+        assistant = GameObject.FindGameObjectWithTag("Player").GetComponent<Assistant>();
 
         timer = timeBtwSpawn;
         health = 10;
@@ -60,7 +58,7 @@ public class UpAssistant : MonoBehaviour
     {
         if (timer <= 0)
         {
-            shake.C_Shake(.08f, .8f, .5f);
+            //shake.C_Shake(.08f, .8f, .5f);
             GameObject instance = Instantiate(bulletIntantiate, shootPoint.position, shootPoint.rotation * new Quaternion(0f, 90f, 0f, 0f));
             Instantiate(bullet, shootPoint.position, Quaternion.identity);
             timer = timeBtwSpawn;
@@ -90,40 +88,40 @@ public class UpAssistant : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("EnemyBullet") || collision.CompareTag("EnemyPoolBullet") || collision.CompareTag("Enemy"))
-        {
-            Destroy(collision.transform.gameObject);
-            StartCoroutine(Hit());
-            shake.C_Shake(.08f, .5f, .5f);
-            health -= 1;
-        }
+        //if (collision.CompareTag("EnemyBullet") || collision.CompareTag("EnemyPoolBullet") || collision.CompareTag("Enemy"))
+        //{
+        //    Destroy(collision.transform.gameObject);
+        //  //  StartCoroutine(Hit());
+        //    shake.C_Shake(.08f, .5f, .5f);
+        //    health -= 1;
+        //}
     }
 
 
-    IEnumerator Hit()
-    {
-        if (health > 6 && health < 10)
-        {
-            sr.color = hitColor[0];
-        }
-        else if (health > 3 && health < 6)
-        {
-            sr.color = hitColor[1];
-        }
-        else if (health < 3)
-        {
-            sr.color = hitColor[2];
-        }
+    //IEnumerator Hit()
+    //{
+    //    if (health > 6 && health < 10)
+    //    {
+    //        sr.color = hitColor[0];
+    //    }
+    //    else if (health > 3 && health < 6)
+    //    {
+    //        sr.color = hitColor[1];
+    //    }
+    //    else if (health < 3)
+    //    {
+    //        sr.color = hitColor[2];
+    //    }
 
-        yield return new WaitForSeconds(.1f);
+    //    yield return new WaitForSeconds(.1f);
 
-        sr.color = Color.green;
-    }
+    //    sr.color = Color.green;
+    //}
 
     private void OnDestroy()
     {
         assistant.assistantNum = 0;
-        GameObject instance = Instantiate(destroyParticle, transform.position, Quaternion.identity);
-        Destroy(instance, 1.2f);
+       // GameObject instance = Instantiate(destroyParticle, transform.position, Quaternion.identity);
+      //  Destroy(instance, 1.2f);
     }
 }
