@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class EnemyBullet_1 : MonoBehaviour
 {
     [SerializeField] float speed = 15f;
 
@@ -25,9 +25,9 @@ public class Bullet : MonoBehaviour
         transform.Translate(Vector2.right * speed * Time.fixedDeltaTime);
     }
 
-    //private void OnDestroy()
-    //{
-    //    GameObject instance = Instantiate(destroyParticle, transform.position, Quaternion.identity);
-    //    Destroy(instance, 1.2f);
-    //}
+    private void OnDestroy()
+    {
+        GameObject instance = Instantiate(destroyParticle, transform.position, Quaternion.identity);
+        Destroy(instance, 1.2f);
+    }
 }

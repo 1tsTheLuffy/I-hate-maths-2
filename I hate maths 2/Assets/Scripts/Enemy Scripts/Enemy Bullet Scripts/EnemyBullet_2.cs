@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class EnemyBullet_2 : MonoBehaviour
 {
     [SerializeField] float speed = 15f;
 
@@ -22,12 +22,15 @@ public class Bullet : MonoBehaviour
 
     private void FixedUpdate()
     {
-        transform.Translate(Vector2.right * speed * Time.fixedDeltaTime);
+        transform.Translate(Vector2.left * speed * Time.fixedDeltaTime);
     }
 
-    //private void OnDestroy()
-    //{
-    //    GameObject instance = Instantiate(destroyParticle, transform.position, Quaternion.identity);
-    //    Destroy(instance, 1.2f);
-    //}
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Player"))
+        {
+            GameObject instance = Instantiate(destroyParticle, transform.position, Quaternion.identity);
+            Destroy(instance, 1.2f);
+        }
+    }
 }

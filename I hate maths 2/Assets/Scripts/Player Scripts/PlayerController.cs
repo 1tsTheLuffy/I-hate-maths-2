@@ -211,6 +211,13 @@ public class PlayerController : MonoBehaviour
             health -= 1f;
         }
 
+        if(collision.CompareTag("EnemyBullet"))
+        {
+            Destroy(collision.transform.gameObject);
+            shake.C_Shake(.1f, 1f, .8f);
+            health -= 1f;
+        }
+
         #endregion
     }
     #endregion
