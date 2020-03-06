@@ -9,6 +9,7 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerController))]
 public class PlayerController : MonoBehaviour
 {
+    private bool isDeHeat;
     private Vector2 movement;
     private Vector2 mousePos;
     #region float
@@ -20,6 +21,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float startTimeForShoot = 1f;
     [SerializeField] float timeBtwShoot = 1f;
     [SerializeField] float waitTime = .2f;
+    [SerializeField] float heatNum = 0;
+    [SerializeField] float heatTimer = .2f;
+    [SerializeField] float startHeatTimer = .2f;
     public float health = 15f;
     #endregion
 
@@ -44,10 +48,13 @@ public class PlayerController : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] HealthBar bar;
+    [SerializeField] HeatBar heat;
 
     Rigidbody2D rb;
     SpriteRenderer sr;
     Camera cam;
+
+    #region START
 
     private void Start()
     {
@@ -63,9 +70,14 @@ public class PlayerController : MonoBehaviour
         startTimeForShoot = timeBtwShoot;
 
         bar.setMaxHealth(health);
+        heat.setMinHeatValue(heatNum);
+
+        isDeHeat = false;
 
         Cursor.visible = false;
     }
+
+    #endregion
 
     private void Update()
     {
@@ -77,20 +89,48 @@ public class PlayerController : MonoBehaviour
 
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, x1, x2), Mathf.Clamp(transform.position.y, y1, y2), transform.position.z);
 
-        if(Input.GetMouseButton(0) && startTimeForShoot <= 0)
+        if(Input.GetMouseButton(0) && startTimeForShoot <= 0 && heatNum < 20f)
         {
+            isDeHeat = false;
             shake.C_Shake(shakeDuration, shakeAmplitude, shakeFrequency);
          //   StartCoroutine(Flash(flash[1]));
             GameObject instance = Instantiate(shootParticle, shootPoint.position, shootPoint.rotation * new Quaternion(0f, 90f, 0f, 0f));
             Shoot();
             Destroy(instance, 1f);
             startTimeForShoot = timeBtwShoot;
-        }else
+
+            if (heatTimer <= 0)
+            {
+                heatNum++;
+                heatTimer = startHeatTimer;
+            }
+            else
+            {
+                heatTimer -= Time.deltaTime;
+            }
+
+        }
+        else
         {
             startTimeForShoot -= Time.deltaTime;
         }
 
-        if(health <= 0)
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (isDeHeat == false)
+            {
+                StartCoroutine(DeHeat());
+            }
+        }
+
+        if(heatNum <= 0f)
+        {
+            heatNum = 0f;
+        }
+
+        heat.setHeatValue(heatNum);
+
+        if (health <= 0)
         {
             Destroy(gameObject);
             return;
@@ -104,6 +144,21 @@ public class PlayerController : MonoBehaviour
         {
             health++;
         }
+
+        // EVERYTHING RELATED TO BULLET SWITCHING..............
+
+        if(bullet == bulletType[0])
+        {
+            timeBtwShoot = .3f;
+        }else if(bullet == bulletType[1])
+        {
+            timeBtwShoot = .4f;
+        }else if(bullet == bulletType[2])
+        {
+            timeBtwShoot = .15f;
+        }
+
+        // END OF EVERYTHING RELATED TO BULLET SWITCHING..............
 
         bar.setHealth(health);
     }
@@ -171,5 +226,15 @@ public class PlayerController : MonoBehaviour
         sr.color = color;
         yield return new WaitForSeconds(waitTime);
         sr.color = flash[0];
+    }
+
+    IEnumerator DeHeat()
+    {
+        isDeHeat = true;
+        while (isDeHeat == true)
+        {
+            heatNum--;
+            yield return new WaitForSeconds(0.1f);
+        }
     }
 }

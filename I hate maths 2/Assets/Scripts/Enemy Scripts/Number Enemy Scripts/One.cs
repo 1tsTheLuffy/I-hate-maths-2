@@ -73,6 +73,12 @@ public class One : MonoBehaviour
             shake.C_Shake(.1f, 2f, .8f);
             health = 0;
         }
+
+        if(collision.CompareTag("Bullet_2"))
+        {
+            shake.C_Shake(.1f, 2f, .8f);
+            health = 0;
+        }
     }
 
     private void OnBecameInvisible()

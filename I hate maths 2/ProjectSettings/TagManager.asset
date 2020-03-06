@@ -11,6 +11,7 @@ TagManager:
   - Assistant_PowerUp
   - Enemy
   - Bullet_1
+  - Bullet_2
   layers:
   - Default
   - TransparentFX
