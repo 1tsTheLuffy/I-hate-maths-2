@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     private bool isStarted;
+    private bool isCurlyStarted;
 
     [System.Serializable]
     public class GetEnemyData
@@ -29,6 +30,11 @@ public class EnemySpawner : MonoBehaviour
         {
             StartCoroutine(One());
         }
+
+        if(!isCurlyStarted)
+        {
+            StartCoroutine(Curly());
+        }
     }
 
     IEnumerator One()
@@ -40,6 +46,18 @@ public class EnemySpawner : MonoBehaviour
             int i = Random.Range(0, getEnemyData[0].EnemyPosition.Length);
             Instantiate(getEnemyData[0].Enemy[0], getEnemyData[0].EnemyPosition[i].position, Quaternion.identity);
             yield return new WaitForSeconds(delay);
+        }
+    }
+
+    IEnumerator Curly()
+    {
+        isCurlyStarted = true;
+        while (isCurlyStarted == true)
+        {
+            float delay = Random.Range(getEnemyData[1].x, getEnemyData[1].y);
+            yield return new WaitForSeconds(delay);
+            int i = Random.Range(0, getEnemyData[1].EnemyPosition.Length);
+            Instantiate(getEnemyData[1].Enemy[0], getEnemyData[1].EnemyPosition[i].position, Quaternion.identity);
         }
     }
 }

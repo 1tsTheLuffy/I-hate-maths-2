@@ -51,6 +51,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] HeatBar heat;
 
     Rigidbody2D rb;
+    Animator animator;
     SpriteRenderer sr;
     Camera cam;
 
@@ -59,6 +60,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
         cam = Camera.main;
 
@@ -206,6 +208,8 @@ public class PlayerController : MonoBehaviour
 
         if(collision.CompareTag("Enemy"))
         {
+            animator.SetTrigger("Hit");
+            Trigger();
             Destroy(collision.transform.gameObject);
             shake.C_Shake(.1f, 2f, .8f);
             health -= 1f;
@@ -213,9 +217,19 @@ public class PlayerController : MonoBehaviour
 
         if(collision.CompareTag("EnemyBullet"))
         {
+            animator.SetTrigger("Hit");
+            Trigger();
             Destroy(collision.transform.gameObject);
             shake.C_Shake(.1f, 1f, .8f);
             health -= 1f;
+        }
+
+        if(collision.CompareTag("Theta"))
+        {
+            Destroy(collision.transform.gameObject);
+            Trigger();
+            shake.C_Shake(.1f, 2f, 1f);
+            health -= 5f;
         }
 
         #endregion
@@ -226,6 +240,11 @@ public class PlayerController : MonoBehaviour
     {
         Instantiate(bullet, shootPoint.position, Quaternion.identity);
         return bullet;
+    }
+
+    private void Trigger()
+    {
+        StartCoroutine(Flash(Color.red));
     }
 
     IEnumerator Flash(Color color)

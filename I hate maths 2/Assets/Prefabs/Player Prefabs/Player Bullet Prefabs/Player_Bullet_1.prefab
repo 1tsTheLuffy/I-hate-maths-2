@@ -4889,3 +4889,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 25
+  destroyParticle: {fileID: 7782985251604997918, guid: 6be3ed86c5d459841a5bcbb4e576a2c3,
+    type: 3}

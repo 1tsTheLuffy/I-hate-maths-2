@@ -37,6 +37,8 @@ public class One : MonoBehaviour
 
     private void Update()
     {
+        if (bus == null)
+            return;
 
         distance = Vector2.Distance(transform.position, bus.position);
 

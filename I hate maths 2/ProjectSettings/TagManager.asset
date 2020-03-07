@@ -13,6 +13,7 @@ TagManager:
   - Bullet_1
   - Bullet_2
   - EnemyBullet
+  - Theta
   layers:
   - Default
   - TransparentFX
