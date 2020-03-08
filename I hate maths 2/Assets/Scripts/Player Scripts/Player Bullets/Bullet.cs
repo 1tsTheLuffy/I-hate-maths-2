@@ -6,8 +6,6 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] float speed = 15f;
 
-    [SerializeField] GameObject destroyParticle;
-
     Rigidbody2D rb;
 
     private void Start()
@@ -23,11 +21,5 @@ public class Bullet : MonoBehaviour
     private void FixedUpdate()
     {
         transform.Translate(Vector2.right * speed * Time.fixedDeltaTime);
-    }
-
-    private void OnDestroy()
-    {
-        GameObject instance = Instantiate(destroyParticle, transform.position, Quaternion.identity);
-        Destroy(instance, 1.2f);
     }
 }

@@ -24,6 +24,8 @@ public class Circle : MonoBehaviour
 
     [SerializeField] Fire fire;
 
+    [SerializeField] Color color;
+
     Rigidbody2D rb;
     Animator animator;
     SpriteRenderer sr;
@@ -146,13 +148,23 @@ public class Circle : MonoBehaviour
             Destroy(collision.transform.gameObject);
             health -= 1f;
         }
+
+        if (collision.CompareTag("Bullet_2"))
+        {
+            StartCoroutine(Damage());
+            animator.SetTrigger("Hit");
+            StartCoroutine(Flash());
+            shake.C_Shake(.1f, 1.5f, .8f);
+            Destroy(collision.transform.gameObject);
+            health -= 2f;
+        }
     }
 
     IEnumerator Flash()
     {
         sr.color = Color.red;
         yield return new WaitForSeconds(.1f);
-        sr.color = Color.white;
+        sr.color = color;
     }
 
     IEnumerator Damage()

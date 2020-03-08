@@ -216,7 +216,7 @@ public class PlayerController : MonoBehaviour
 
         if(collision.CompareTag("Enemy"))
         {
-            animator.SetTrigger("Hit");
+            SetTrigger();
             Trigger();
             Destroy(collision.transform.gameObject);
             shake.C_Shake(.1f, 2f, .8f);
@@ -225,7 +225,7 @@ public class PlayerController : MonoBehaviour
 
         if(collision.CompareTag("EnemyBullet"))
         {
-            animator.SetTrigger("Hit");
+            SetTrigger();
             Trigger();
             Destroy(collision.transform.gameObject);
             shake.C_Shake(.1f, 1f, .8f);
@@ -234,7 +234,7 @@ public class PlayerController : MonoBehaviour
 
         if(collision.CompareTag("Theta"))
         {
-            animator.SetTrigger("Hit");
+            SetTrigger();
             Destroy(collision.transform.gameObject);
             Trigger();
             shake.C_Shake(.1f, 2f, 1f);
@@ -243,12 +243,20 @@ public class PlayerController : MonoBehaviour
 
         if(collision.CompareTag("EnemyPoolBullet"))
         {
-            animator.SetTrigger("Hit");
+            SetTrigger();
             collision.transform.gameObject.SetActive(false);
             health -= 1f;
             shake.C_Shake(.1f, 1.5f, .8f);
             Trigger();
         } 
+
+        if(collision.CompareTag("Circle"))
+        {
+            SetTrigger();
+            Trigger();
+            shake.C_Shake(.1f, 2f, .8f);
+            health -= 2f;
+        }
 
         #endregion
     }
@@ -263,6 +271,11 @@ public class PlayerController : MonoBehaviour
     private void Trigger()
     {
         StartCoroutine(Flash(Color.red));
+    }
+
+    private void SetTrigger()
+    {
+        animator.SetTrigger("Hit");
     }
 
     IEnumerator Flash(Color color)
