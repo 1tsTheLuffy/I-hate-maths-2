@@ -56,6 +56,11 @@ public class Alpha : MonoBehaviour
         {
             Destroy(gameObject, destroyWaitTime);
         }
+
+        if(transform.position.x < -14f)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -68,11 +73,6 @@ public class Alpha : MonoBehaviour
             Destroy(collision.transform.gameObject);
             health -= 1;
         }
-    }
-
-    private void OnBecameInvisible()
-    {
-        Destroy(gameObject);
     }
 
     private void OnDestroy()

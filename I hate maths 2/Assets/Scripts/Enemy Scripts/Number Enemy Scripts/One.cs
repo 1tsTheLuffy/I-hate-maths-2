@@ -6,10 +6,12 @@ using UnityEngine;
 [RequireComponent(typeof(One))]
 public class One : MonoBehaviour
 {
-    private int health;
+    private int health = 1;
     private Vector2 target;
     private float distance;
     [SerializeField] float speed;
+    [Range(0f, 1f)]
+    [SerializeField] float destroyWaitTime;
 
     [SerializeField] GameObject destroyParticle;
 
@@ -18,10 +20,14 @@ public class One : MonoBehaviour
     private Transform bus;
 
     private Rigidbody2D rb;
+    private Animator animator;
+    private SpriteRenderer sr;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
 
         bus = GameObject.FindGameObjectWithTag("Player").transform;
 
@@ -44,9 +50,12 @@ public class One : MonoBehaviour
 
         if (health == 0)
         {
+            Destroy(gameObject, destroyWaitTime);
+        }
+
+        if(transform.position.x < -14f)
+        {
             Destroy(gameObject);
-            GameObject instance = Instantiate(destroyParticle, transform.position, Quaternion.identity);
-            Destroy(instance, 1.5f);
         }
     }
 
@@ -71,6 +80,8 @@ public class One : MonoBehaviour
     {
         if (collision.CompareTag("Bullet_1"))
         {
+            DamageTrigger();
+            TriggerFlash();
             Destroy(collision.transform.gameObject);
             shake.C_Shake(.1f, 2f, .8f);
             health = 0;
@@ -78,13 +89,33 @@ public class One : MonoBehaviour
 
         if(collision.CompareTag("Bullet_2"))
         {
+            DamageTrigger();
+            TriggerFlash();
             shake.C_Shake(.1f, 2f, .8f);
             health = 0;
         }
     }
 
-    private void OnBecameInvisible()
+    private void DamageTrigger()
     {
-        Destroy(gameObject);
+        animator.SetTrigger("Hit");
+    }
+
+    private void TriggerFlash()
+    {
+        StartCoroutine(Flash());
+    }
+
+    private void OnDestroy()
+    {
+        GameObject instance = Instantiate(destroyParticle, transform.position, Quaternion.identity);
+        Destroy(instance, 1.5f);
+    }
+
+    IEnumerator Flash()
+    {
+        sr.color = Color.red;
+        yield return new WaitForSeconds(.2f);
+        sr.color = Color.gray;
     }
 }
