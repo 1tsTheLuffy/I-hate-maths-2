@@ -9,6 +9,8 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerController))]
 public class PlayerController : MonoBehaviour
 {
+    #region VARIABLES
+
     private bool isDeHeat;
     private Vector2 movement;
     private Vector2 mousePos;
@@ -55,6 +57,8 @@ public class PlayerController : MonoBehaviour
     SpriteRenderer sr;
     Camera cam;
 
+    #endregion
+
     #region START
 
     private void Start()
@@ -80,6 +84,8 @@ public class PlayerController : MonoBehaviour
     }
 
     #endregion
+
+    #region UPDATE
 
     private void Update()
     {
@@ -165,6 +171,8 @@ public class PlayerController : MonoBehaviour
         bar.setHealth(health);
     }
 
+    #endregion
+
     #region Trigger
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -226,11 +234,21 @@ public class PlayerController : MonoBehaviour
 
         if(collision.CompareTag("Theta"))
         {
+            animator.SetTrigger("Hit");
             Destroy(collision.transform.gameObject);
             Trigger();
             shake.C_Shake(.1f, 2f, 1f);
             health -= 5f;
         }
+
+        if(collision.CompareTag("EnemyPoolBullet"))
+        {
+            animator.SetTrigger("Hit");
+            collision.transform.gameObject.SetActive(false);
+            health -= 1f;
+            shake.C_Shake(.1f, 1.5f, .8f);
+            Trigger();
+        } 
 
         #endregion
     }

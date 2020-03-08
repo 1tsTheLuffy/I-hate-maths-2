@@ -7,13 +7,10 @@ public class ObjectPooler : MonoBehaviour
     public bool expand = true;
 
     [SerializeField] GameObject bullet;
-    [SerializeField] GameObject[] bulletType;
     public List<GameObject> pool;
 
     private void Start()
     {
-        bullet = bulletType[0];
-
         expand = true;
         pool = new List<GameObject>();
     }
@@ -40,4 +37,5 @@ public class ObjectPooler : MonoBehaviour
 
         return null;
     }
+
 }

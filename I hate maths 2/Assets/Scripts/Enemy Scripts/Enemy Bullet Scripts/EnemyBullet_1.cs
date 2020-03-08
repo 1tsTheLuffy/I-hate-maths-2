@@ -17,7 +17,6 @@ public class EnemyBullet_1 : MonoBehaviour
 
     private void Update()
     {
-        Destroy(gameObject, 1f);
     }
 
     private void FixedUpdate()
