@@ -73,6 +73,13 @@ public class Alpha : MonoBehaviour
             Destroy(collision.transform.gameObject);
             health -= 1;
         }
+        if (collision.CompareTag("Bullet_2"))
+        {
+            animator.SetTrigger("Hit");
+            StartCoroutine(Flash());
+            shake.C_Shake(.1f, 1.5f, .8f);
+            health -= 1;
+        }
     }
 
     private void OnDestroy()

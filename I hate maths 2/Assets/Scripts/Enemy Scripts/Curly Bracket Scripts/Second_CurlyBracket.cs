@@ -11,21 +11,28 @@ public class Second_CurlyBracket : MonoBehaviour
     [SerializeField] float timer = 1f;
     [SerializeField] float timeBtwShoot = 1f;
     [SerializeField] float health = 4f;
+    [Range(0f, 1f)]
+    [SerializeField] float waitTime = .1f;
 
     private Vector2 playerPos;// = Vector2.zero;
 
     [SerializeField] GameObject[] bullet;
+    [SerializeField] GameObject destroyParticle;
 
     [SerializeField] Transform[] movepoint;
     [SerializeField] Transform[] shootPoint;
     Transform player;
 
     Rigidbody2D rb;
+    Animator animator;
+    SpriteRenderer sr;
     CameraShake shake;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
 
         shake = GameObject.FindGameObjectWithTag("CameraShake").GetComponent<CameraShake>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -61,7 +68,7 @@ public class Second_CurlyBracket : MonoBehaviour
 
         if(health <= 0)
         {
-            Destroy(gameObject);
+            Destroy(gameObject, waitTime);
         }
 
     }
@@ -70,9 +77,32 @@ public class Second_CurlyBracket : MonoBehaviour
     {
         if(collision.CompareTag("Bullet_1"))
         {
+            animator.SetTrigger("Hit");
+            StartCoroutine(Flash());
             Destroy(collision.transform.gameObject);
             health -= 1f;
             shake.C_Shake(0.1f, 1.5f, .8f);
         }
+
+        if (collision.CompareTag("Bullet_2"))
+        {
+            animator.SetTrigger("Hit");
+            StartCoroutine(Flash());
+            health -= 2f;
+            shake.C_Shake(0.1f, 1.5f, .8f);
+        }
+    }
+
+    IEnumerator Flash()
+    {
+        sr.color = Color.red;
+        yield return new WaitForSeconds(.2f);
+        sr.color = Color.black;
+    }
+
+    private void OnDestroy()
+    {
+        GameObject instance = Instantiate(destroyParticle, transform.position, Quaternion.identity);
+        Destroy(instance, 1.2f);
     }
 }

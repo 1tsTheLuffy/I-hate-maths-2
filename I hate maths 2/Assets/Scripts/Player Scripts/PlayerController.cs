@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float heatNum = 0;
     [SerializeField] float heatTimer = .2f;
     [SerializeField] float startHeatTimer = .2f;
+    [SerializeField] float startTimeForBullet = 1f;
+    [SerializeField] float timeToChangeTheBullet = 1f;
     public float health = 15f;
     #endregion
 
@@ -35,6 +37,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject shootParticle;
     [SerializeField] GameObject[] shootParticleType;
     [SerializeField] GameObject[] powerUpTaken;
+    [SerializeField] GameObject HeatBarBorder;
 
     [Header("Transforms")]
     [SerializeField] Transform shootPoint;
@@ -74,11 +77,14 @@ public class PlayerController : MonoBehaviour
         shootParticle = shootParticleType[0];
 
         startTimeForShoot = timeBtwShoot;
+        startTimeForBullet = timeToChangeTheBullet;
 
         bar.setMaxHealth(health);
         heat.setMinHeatValue(heatNum);
 
         isDeHeat = false;
+
+        HeatBarBorder.SetActive(false);
 
         Cursor.visible = false;
     }
@@ -96,6 +102,8 @@ public class PlayerController : MonoBehaviour
         transform.position = mousePos;
 
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, x1, x2), Mathf.Clamp(transform.position.y, y1, y2), transform.position.z);
+
+        // SHOOTING........
 
         if(Input.GetMouseButton(0) && startTimeForShoot <= 0 && heatNum < 20f)
         {
@@ -131,12 +139,41 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        if(heatNum >= 19.5f && Input.GetMouseButton(0))
+        {
+            HeatBarBorder.SetActive(true);
+        }else
+        {
+            HeatBarBorder.SetActive(false);
+        }
+
+        if(startTimeForBullet <= 0)
+        {
+            bullet = bulletType[0];
+        }else
+        {
+            startTimeForBullet -= Time.deltaTime;
+        }
+
         if(heatNum <= 0f)
         {
             heatNum = 0f;
         }
 
+        if(bullet == bulletType[0])
+        {
+            shootParticle = shootParticleType[0];
+        }else if(bullet == bulletType[1])
+        {
+            shootParticle = shootParticleType[1];
+        }else if(bullet == bulletType[2])
+        {
+            shootParticle = shootParticleType[2];
+        }
+
         heat.setHeatValue(heatNum);
+
+        // END SHOOTING.
 
         if (health <= 0)
         {
@@ -186,6 +223,15 @@ public class PlayerController : MonoBehaviour
             waitTime = .2f;
             StartCoroutine(Flash(Color.blue));
             Destroy(instance, 1f);
+
+            if(bullet == bulletType[0] || bullet == bulletType[2])
+            {
+                startTimeForBullet = 20f;
+            }else if(bullet == bulletType[1])
+            {
+                startTimeForBullet += 20f;
+            }
+
             return;
         }
         if(collision.CompareTag("Bullet_3_PowerUp"))
@@ -197,6 +243,15 @@ public class PlayerController : MonoBehaviour
             waitTime = .2f;
             StartCoroutine(Flash(Color.yellow));
             Destroy(instance, 1f);
+
+            if(bullet == bulletType[0] || bullet == bulletType[1])
+            {
+                startTimeForBullet = 20f;
+            }else if(bullet == bulletType[2])
+            {
+                startTimeForBullet += 20f;
+            }
+
             return;
         }
 

@@ -219,19 +219,22 @@ MonoBehaviour:
   timer: 0.2
   timeBtwShoot: 0.2
   health: 4
+  waitTime: 0.112
   bullet:
   - {fileID: 3816850721516326880, guid: 2c54243020600584b893ce33488b7070, type: 3}
   - {fileID: 2740625102078100236, guid: b1d7f8f08c08b344fb773ed723666f55, type: 3}
+  destroyParticle: {fileID: 2992311220481498526, guid: 084aed28950080a44acccfe2102c4be8,
+    type: 3}
   movepoint:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 250933033700723342, guid: fbbc6a1fb84cff944ba2d974ecfff892, type: 3}
+  - {fileID: 5936765515700440051, guid: 0f5366119faf41e438bbc8272b357081, type: 3}
+  - {fileID: 7344842673579989088, guid: a590cb8186c8a324b9f523d3cf9fd488, type: 3}
+  - {fileID: 4048435412389887630, guid: aba1e87afab05ce479071cfbe8652b2d, type: 3}
+  - {fileID: 3408290541651937098, guid: b4cd796dd6ccdf946b5318b769bcd8a6, type: 3}
+  - {fileID: 1040264389183252758, guid: 337d507d1c5c975489471787124f51ac, type: 3}
+  - {fileID: 6893677607169080083, guid: 61c0db2a8b8b90a47a886e6117ebb054, type: 3}
+  - {fileID: 4754984005493925152, guid: d7658fa4a3aad1641b7735de18fd6136, type: 3}
+  - {fileID: 2006050436550318764, guid: ee9e38b3af6dee54f8ddb32b713f6343, type: 3}
   shootPoint:
   - {fileID: 3003801108109610293}
   - {fileID: 3003801106902659501}

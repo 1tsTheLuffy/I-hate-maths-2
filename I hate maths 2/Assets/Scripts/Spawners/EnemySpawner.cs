@@ -7,6 +7,8 @@ public class EnemySpawner : MonoBehaviour
     private bool isStarted;
     private bool isAlpha;
     private bool isCurlyStarted;
+    private bool isCurly_2;
+    private bool isDiagram;
 
     [System.Serializable]
     public class GetEnemyData
@@ -41,6 +43,16 @@ public class EnemySpawner : MonoBehaviour
         if(!isAlpha)
         {
             StartCoroutine(Alpha());
+        }
+
+        if(!isCurly_2)
+        {
+            StartCoroutine(Curly_2());
+        }
+
+        if(!isDiagram)
+        {
+            StartCoroutine(Diagram());
         }
     }
 
@@ -77,6 +89,30 @@ public class EnemySpawner : MonoBehaviour
             yield return new WaitForSeconds(delay);
             int i = Random.Range(0, getEnemyData[2].EnemyPosition.Length);
             Instantiate(getEnemyData[2].Enemy[0], getEnemyData[2].EnemyPosition[i].position, Quaternion.identity);
+        }
+    }
+
+    IEnumerator Curly_2()
+    {
+        isCurly_2 = true;
+        while (isCurly_2 == true)
+        {
+            float delay = Random.Range(getEnemyData[3].x, getEnemyData[3].y);
+            yield return new WaitForSeconds(delay);
+            int i = Random.Range(0, getEnemyData[3].EnemyPosition.Length);
+            Instantiate(getEnemyData[3].Enemy[0], getEnemyData[3].EnemyPosition[i].position, Quaternion.identity);
+        }
+    }
+
+    IEnumerator Diagram()
+    {
+        isDiagram = true;
+        while (isDiagram == true)
+        {
+            float delay = Random.Range(getEnemyData[4].x, getEnemyData[4].y);
+            yield return new WaitForSeconds(delay);
+            int i = Random.Range(0, getEnemyData[4].EnemyPosition.Length);
+            Instantiate(getEnemyData[4].Enemy[0], getEnemyData[4].EnemyPosition[i].position, Quaternion.identity);
         }
     }
 }
