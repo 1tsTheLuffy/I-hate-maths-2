@@ -70,7 +70,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7032320008257393716}
   - component: {fileID: 7032320008257393717}
-  - component: {fileID: 7032320008257393714}
   - component: {fileID: 7032320008257393715}
   - component: {fileID: 1927451186}
   - component: {fileID: 1927451187}
@@ -147,25 +146,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &7032320008257393714
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7032320008257393712}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 07c30b22edf2f5c4caaf52fa492738d9, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &7032320008257393715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,8 +159,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  frequency: 3.5
-  magnitude: 3.5
+  frequency: 2
+  magnitude: 2
   timer: 0.1
   timeBtwSpawn: 0.1
   bullet:

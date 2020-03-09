@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CurlyBracket : MonoBehaviour
 {
-    private int health = 1;
+    private int health = 2;
     [SerializeField] float speed;
     [SerializeField] float frequency;
     [SerializeField] float magnitude;
@@ -18,15 +18,17 @@ public class CurlyBracket : MonoBehaviour
     [SerializeField] Transform[] shootPoint;
 
     Rigidbody2D rb;
+    Animator animator;
     CameraShake shake;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
 
         shake = GameObject.FindGameObjectWithTag("CameraShake").GetComponent<CameraShake>();
 
-        health = 1;
+        health = 2;
         timer = timeBtwSpawn;
     }
 
@@ -72,9 +74,25 @@ public class CurlyBracket : MonoBehaviour
     {
         if (collision.CompareTag("Bullet_1"))
         {
+            animator.SetTrigger("Hit");
+            StartCoroutine(Damage());
             Destroy(collision.transform.gameObject);
             shake.C_Shake(.01f, 1f, 1f);
-            health = 0;
+            health -= 1;
         }
+
+        if (collision.CompareTag("Bullet_2"))
+        {
+            StartCoroutine(Damage());
+            shake.C_Shake(.01f, 1.5f, .8f);
+            health -= 2;
+        }
+    }
+
+    IEnumerator Damage()
+    {
+        speed = 0f;
+        yield return new WaitForSeconds(.2f);
+        speed = 1;
     }
 }
