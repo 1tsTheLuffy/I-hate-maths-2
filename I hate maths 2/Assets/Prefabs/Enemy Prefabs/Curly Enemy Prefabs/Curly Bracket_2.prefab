@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 3003801108290894406}
   m_Layer: 0
   m_Name: Curly Bracket_2
-  m_TagString: Untagged
+  m_TagString: MediumEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -216,8 +216,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  timer: 0.2
-  timeBtwShoot: 0.2
+  timer: 0.5
+  timeBtwShoot: 0.5
   health: 4
   waitTime: 0.112
   bullet:

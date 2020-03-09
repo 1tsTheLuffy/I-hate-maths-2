@@ -4,6 +4,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(PlayerController))]
@@ -178,6 +179,7 @@ public class PlayerController : MonoBehaviour
         if (health <= 0)
         {
             Destroy(gameObject);
+            SceneManager.LoadScene(0);
             return;
         }
 
@@ -311,6 +313,14 @@ public class PlayerController : MonoBehaviour
             Trigger();
             shake.C_Shake(.1f, 2f, .8f);
             health -= 2f;
+        }
+
+        if(collision.CompareTag("MediumEnemy"))
+        {
+            SetTrigger();
+            Trigger();
+            shake.C_Shake(.1f, 2f, .8f);
+            health -= 4f;
         }
 
         #endregion

@@ -16,6 +16,7 @@ TagManager:
   - Theta
   - EnemyPoolBullet
   - Circle
+  - MediumEnemy
   layers:
   - Default
   - TransparentFX
