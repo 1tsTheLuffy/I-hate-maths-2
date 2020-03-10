@@ -17,6 +17,7 @@ TagManager:
   - EnemyPoolBullet
   - Circle
   - MediumEnemy
+  - New
   layers:
   - Default
   - TransparentFX

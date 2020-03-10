@@ -165,11 +165,11 @@ MonoBehaviour:
   health: 5
   target: {x: 0, y: 0}
   movepoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7502833753612825907, guid: 5d7c1c72609661847af35ceeab2f3469, type: 3}
+  - {fileID: 3702402420867385987, guid: cd4abf54a61e07b44880d2cb6833e38b, type: 3}
+  - {fileID: 7861607373444960951, guid: 12fd96e4ddcf7f748996ff917e7eecd1, type: 3}
+  - {fileID: 5559123978968355775, guid: 5ae8840398cf44e4fbea8987107ba207, type: 3}
+  - {fileID: 3180051891932928917, guid: b8be69937beb8e045bf64ab25c91493a, type: 3}
   Player: {fileID: 0}
   fire:
     numberOfBullet: 10

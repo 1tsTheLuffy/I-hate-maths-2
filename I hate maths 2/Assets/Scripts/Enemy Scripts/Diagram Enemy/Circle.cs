@@ -37,11 +37,14 @@ public class Circle : MonoBehaviour
         animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
 
+        Player = GameObject.FindGameObjectWithTag("Player").transform;
+
         shake = GameObject.FindGameObjectWithTag("CameraShake").GetComponent<CameraShake>();
 
         randomMovepoint = Random.Range(0, movepoints.Length);
         eventType = 1;
 
+        health = 10;
 
         timer = timeToMoveToNextEvent;
     }
@@ -51,8 +54,8 @@ public class Circle : MonoBehaviour
 
         #region AI
 
-        if (Player == null)
-            return;
+        //if (Player == null)
+        //    return;
 
         transform.Rotate(0f, 0f, 7f);
 

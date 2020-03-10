@@ -10,6 +10,8 @@ public class EnemySpawner : MonoBehaviour
     private bool isCurly_2;
     private bool isDiagram;
 
+    public PlayerScoreManager sm;
+
     [System.Serializable]
     public class GetEnemyData
     {
@@ -24,12 +26,18 @@ public class EnemySpawner : MonoBehaviour
 
     private void Start()
     {
+        if (sm == null)
+            return;
+
         isStarted = false;
         isAlpha = false;
     }
 
     private void Update()
     {
+        if (sm == null)
+            return;
+
         if (!isStarted)
         {
             StartCoroutine(One());
@@ -54,6 +62,47 @@ public class EnemySpawner : MonoBehaviour
         {
             StartCoroutine(Diagram());
         }
+
+
+        if(sm.playerController.score > 0 && sm.playerController.score < 15)
+        {
+            getEnemyData[0].x = 1;
+            getEnemyData[0].y = 4;
+
+            getEnemyData[2].x = 1;
+            getEnemyData[2].y = 4;
+        }
+
+        if(sm.playerController.score > 15 && sm.playerController.score < 30)
+        {
+            getEnemyData[0].x = 1.7f;
+            getEnemyData[0].y = 3.7f;
+
+            getEnemyData[2].x = 1.7f;
+            getEnemyData[2].y = 3.7f;
+        }
+
+        if(sm.playerController.score > 30 && sm.playerController.score < 60)
+        {
+            getEnemyData[0].x = 1;
+            getEnemyData[0].y = 5;
+
+            getEnemyData[2].x = 1;
+            getEnemyData[2].y = 5;
+        }
+
+        if(sm.playerController.score > 45 && sm.playerController.score < 65)
+        {
+            getEnemyData[1].x = 60;
+            getEnemyData[1].y = 80;
+        }
+
+        //if(sm.playerController.score > 100)
+        //{
+        //    getEnemyData[4].x = 50;
+        //    getEnemyData[4].y = 100;
+        //}
+
     }
 
     IEnumerator One()

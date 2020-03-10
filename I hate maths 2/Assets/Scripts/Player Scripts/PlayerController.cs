@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(PlayerController))]
@@ -29,7 +30,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float startHeatTimer = .2f;
     [SerializeField] float startTimeForBullet = 1f;
     [SerializeField] float timeToChangeTheBullet = 1f;
+    [SerializeField] float scoreTimer = .1f;
+    [SerializeField] float timeToIncreaseScore = .1f;
     public float health = 15f;
+    public int score = 0;
     #endregion
 
     [Header("GameObject")]
@@ -79,6 +83,7 @@ public class PlayerController : MonoBehaviour
 
         startTimeForShoot = timeBtwShoot;
         startTimeForBullet = timeToChangeTheBullet;
+        scoreTimer = timeToIncreaseScore;
 
         bar.setMaxHealth(health);
         heat.setMinHeatValue(heatNum);
@@ -183,6 +188,11 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+        if(health > 20)
+        {
+            health = 20;
+        }
+
         if(Input.GetKeyDown(KeyCode.Space))
         {
             health--;
@@ -206,6 +216,19 @@ public class PlayerController : MonoBehaviour
         }
 
         // END OF EVERYTHING RELATED TO BULLET SWITCHING..............
+
+        // SCORE.......
+
+        if(scoreTimer <= 0)
+        {
+            score += 1;
+            scoreTimer = timeToIncreaseScore;
+        }else
+        {
+            scoreTimer -= Time.deltaTime;
+        }
+
+        //END SCORE........
 
         bar.setHealth(health);
     }

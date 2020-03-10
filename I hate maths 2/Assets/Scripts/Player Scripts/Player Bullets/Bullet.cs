@@ -15,7 +15,10 @@ public class Bullet : MonoBehaviour
 
     private void Update()
     {
-        Destroy(gameObject, 1f);
+        if(transform.position.x > 7.5f)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void FixedUpdate()

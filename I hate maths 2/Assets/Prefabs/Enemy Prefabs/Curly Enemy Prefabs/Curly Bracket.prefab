@@ -73,6 +73,7 @@ GameObject:
   - component: {fileID: 7032320008257393715}
   - component: {fileID: 1927451186}
   - component: {fileID: 1927451187}
+  - component: {fileID: 9140395941647931333}
   m_Layer: 0
   m_Name: Curly Bracket
   m_TagString: MediumEnemy
@@ -209,3 +210,22 @@ CircleCollider2D:
   m_Offset: {x: 0.028327378, y: 0}
   serializedVersion: 2
   m_Radius: 0.5139215
+--- !u!95 &9140395941647931333
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7032320008257393712}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 41956e4c5c3708a45b7336496deb3bed, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

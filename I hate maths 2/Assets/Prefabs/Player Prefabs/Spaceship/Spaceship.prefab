@@ -374,7 +374,12 @@ MonoBehaviour:
   heatNum: 0
   heatTimer: 0
   startHeatTimer: 0
+  startTimeForBullet: 1
+  timeToChangeTheBullet: 1
+  scoreTimer: 1
+  timeToIncreaseScore: 1
   health: 20
+  score: 0
   bullet: {fileID: 0}
   bulletType:
   - {fileID: 6517320061466344772, guid: 360009f15327a1340aa3380f3a657489, type: 3}
@@ -390,6 +395,7 @@ MonoBehaviour:
   - {fileID: 2872100424434549580, guid: 1bc739cd5cfc46842bb788c796de7ca9, type: 3}
   - {fileID: 2872100424434549580, guid: 7be52423de9e3bb49b650ee306c733ee, type: 3}
   - {fileID: 2872100424434549580, guid: d17dc44eb1fdec9479a20cf2f0ffe1dd, type: 3}
+  HeatBarBorder: {fileID: 0}
   shootPoint: {fileID: 3674765806794300681}
   shake: {fileID: 0}
   shakeDuration: 0.1
