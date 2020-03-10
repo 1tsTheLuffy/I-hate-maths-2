@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float timeToChangeTheBullet = 1f;
     [SerializeField] float scoreTimer = .1f;
     [SerializeField] float timeToIncreaseScore = .1f;
-    public float health = 15f;
+    public float health = 10f;
     public int score = 0;
     #endregion
 
@@ -188,9 +188,9 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        if(health > 20)
+        if(health > 10)
         {
-            health = 20;
+            health = 10;
         }
 
         if(Input.GetKeyDown(KeyCode.Space))
@@ -284,7 +284,7 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(collision.transform.gameObject);
             GameObject instance = Instantiate(powerUpTaken[2], transform.position, Quaternion.identity);
-            health += 5f;
+            health += 2f;
             waitTime = .2f;
             StartCoroutine(Flash(flash[2]));
             Destroy(instance, 1f);

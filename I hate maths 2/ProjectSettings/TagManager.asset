@@ -18,6 +18,8 @@ TagManager:
   - Circle
   - MediumEnemy
   - New
+  - BG
+  - Destroyer
   layers:
   - Default
   - TransparentFX

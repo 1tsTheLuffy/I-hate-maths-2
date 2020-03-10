@@ -378,7 +378,7 @@ MonoBehaviour:
   timeToChangeTheBullet: 1
   scoreTimer: 1
   timeToIncreaseScore: 1
-  health: 20
+  health: 10
   score: 0
   bullet: {fileID: 0}
   bulletType:
