@@ -284,7 +284,7 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(collision.transform.gameObject);
             GameObject instance = Instantiate(powerUpTaken[2], transform.position, Quaternion.identity);
-            health += 2f;
+            health += 4f;
             waitTime = .2f;
             StartCoroutine(Flash(flash[2]));
             Destroy(instance, 1f);
@@ -344,6 +344,14 @@ public class PlayerController : MonoBehaviour
             Trigger();
             shake.C_Shake(.1f, 2f, .8f);
             health -= 4f;
+        }
+
+        if(collision.CompareTag("Boss"))
+        {
+            SetTrigger();
+            Trigger();
+            shake.C_Shake(.1f, 2.5f, .8f);
+            health -= 2f;
         }
 
         #endregion
