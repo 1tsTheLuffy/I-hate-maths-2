@@ -573,6 +573,8 @@ MonoBehaviour:
   - {fileID: 6214167327177900024, guid: 7cc40554d2604bf44b63fe720985cb08, type: 3}
   - {fileID: 6214167327177900024, guid: ee51ad8613bc556499201087fe43a3ac, type: 3}
   - {fileID: 6214167327177900024, guid: d90d37fbd272aca43a44c5f5482e03fc, type: 3}
+  destroyParticle: {fileID: 2056589945252078509, guid: 348d690b1a3a6b14eaea435dbe0b78c6,
+    type: 3}
   movePoints:
   - {fileID: 975992116889692668, guid: 3d2d8715c5f331544a77f77a30fbef9b, type: 3}
   - {fileID: 5919660198742897824, guid: 854f1f5cf02fa4942be3604da295ab34, type: 3}

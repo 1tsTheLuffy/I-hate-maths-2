@@ -19,6 +19,8 @@ public class Circle : MonoBehaviour
 
     [SerializeField] private Vector2 target;
 
+    [SerializeField] private GameObject destroyParticle;
+
     [SerializeField] private Transform[] movepoints;
     [SerializeField] private Transform Player;
 
@@ -115,6 +117,8 @@ public class Circle : MonoBehaviour
         if(health <= 0)
         {
             Destroy(gameObject);
+            GameObject instance = Instantiate(destroyParticle, transform.position, Quaternion.identity);
+            Destroy(instance, 2f);
         }
     }
 

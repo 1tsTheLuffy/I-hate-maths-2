@@ -105,8 +105,11 @@ public class PlayerController : MonoBehaviour
         movement.y = Input.GetAxisRaw("Vertical");
 
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-        transform.position = mousePos;
 
+        if (!Menu.isPause)
+        {
+            transform.position = mousePos;
+        }
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, x1, x2), Mathf.Clamp(transform.position.y, y1, y2), transform.position.z);
 
         // SHOOTING........

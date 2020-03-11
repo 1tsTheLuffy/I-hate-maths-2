@@ -29,6 +29,7 @@ public class Boss : MonoBehaviour
 
     [Header("GameObjects")]
     [SerializeField] GameObject[] Bullet;
+    [SerializeField] GameObject destroyParticle;
 
     [Header("Transform")]
     [SerializeField] Transform[] movePoints;
@@ -244,11 +245,8 @@ public class Boss : MonoBehaviour
         if (health <= 0)
         {
             Destroy(gameObject);
-        }
-
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            health = 24;
+            GameObject instance = Instantiate(destroyParticle, transform.position, Quaternion.identity);
+            Destroy(instance, 2f);
         }
 
         healthBar.setHealth(health);
