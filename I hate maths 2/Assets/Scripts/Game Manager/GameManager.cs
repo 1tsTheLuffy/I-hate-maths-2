@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public PlayerScoreManager sm;
 
-    public EnemySpawner enemySpawner;
+    public GameObject enemySpawner;
 
     public GameObject bossSpawner;
 
@@ -21,9 +21,9 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if(sm.playerController.score >= 10)
+        if(sm.playerController.score >= 150)
         {
-            enemySpawner.enabled = false;
+            enemySpawner.SetActive(false);
             bossSpawner.gameObject.SetActive(true);
             return;
         }

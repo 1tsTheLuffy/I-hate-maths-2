@@ -274,6 +274,14 @@ public class Boss : MonoBehaviour
             health -= 1f;
         }
 
+        if(collision.CompareTag("Bullet_2"))
+        {
+            StartCoroutine(Flash());
+            Destroy(collision.transform.gameObject);
+            shake.C_Shake(.1f, 1.5f, .8f);
+            health -= 2f;
+        }
+
         //if (collision.CompareTag("Bullet_1"))
         //{
         //    if (eventType == 3)
