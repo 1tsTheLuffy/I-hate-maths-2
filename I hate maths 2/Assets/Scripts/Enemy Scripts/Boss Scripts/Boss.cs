@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Boss))]
@@ -76,13 +77,6 @@ public class Boss : MonoBehaviour
     {
         
         transform.localScale = new Vector3(1f, 1f, 1f);
-
-        if(Input.GetKeyDown(KeyCode.Keypad1))
-        {
-
-        }
-
-
 
         // FIRST STAGE.............
 
@@ -247,6 +241,7 @@ public class Boss : MonoBehaviour
             Destroy(gameObject);
             GameObject instance = Instantiate(destroyParticle, transform.position, Quaternion.identity);
             Destroy(instance, 2f);
+            SceneManager.LoadScene(02);
         }
 
         healthBar.setHealth(health);
